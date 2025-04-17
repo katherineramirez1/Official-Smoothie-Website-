@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smoothie Ingredients</title>
+</head>
+<body>
+  <h1 id="smoothie-name">Smoothie</h1>
+  <ul id="ingredient-list">
+    <!-- Ingredients will be injected here -->
+  </ul>
+  <a href="index.html">← Back to menu</a>
+
+  <script>
+    // Define smoothie data
+    const smoothies = {
+      "berry-bliss": {
+        name: "Berry Bliss",
+        ingredients: ["Strawberries", "Blueberries", "Banana", "Almond Milk"]
+      },
+      "green-glow": {
+        name: "Green Glow",
+        ingredients: ["Spinach", "Kale", "Pineapple", "Coconut Water"]
+      },
+      "peanut-butter-power": {
+        name: "Peanut Butter Power",
+        ingredients: ["Peanut Butter", "Banana", "Oats", "Almond Milk"]
+      }
+    };
+
+    // Get smoothie from URL
+    const params = new URLSearchParams(window.location.search);
+    const smoothieKey = params.get("smoothie");
+
+    // If it exists, display it
+    if (smoothies[smoothieKey]) {
+      document.getElementById("smoothie-name").textContent = smoothies[smoothieKey].name;
+      const list = document.getElementById("ingredient-list");
+
+      smoothies[smoothieKey].ingredients.forEach(ingredient => {
+        const li = document.createElement("li");
+        li.textContent = ingredient;
+        list.appendChild(li);
+      });
+    } else {
+      document.getElementById("smoothie-name").textContent = "Smoothie not found.";
+    }
+  </script>
+</body>
+</html>
